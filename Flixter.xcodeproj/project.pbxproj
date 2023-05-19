@@ -11,6 +11,7 @@
 		7ED23628C3CF862BB2486A04 /* Pods_FlixterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61598FE86A7B1EE16437F52F /* Pods_FlixterTests.framework */; };
 		D408C1C32A16A12300FDAFF2 /* PosterComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = D408C1C22A16A12300FDAFF2 /* PosterComponent.mm */; };
 		D408C1C72A170D2F00FDAFF2 /* MoviesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D408C1C62A170D2F00FDAFF2 /* MoviesViewModel.m */; };
+		D49864ED2A17F6B6008ADAD5 /* MovieDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49864EC2A17F6B6008ADAD5 /* MovieDetailsViewController.m */; };
 		D4A27D2E2A15589600BAC32F /* MovieComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4A27D2D2A15589600BAC32F /* MovieComponent.mm */; };
 		D4A27D312A156CD300BAC32F /* ImageDownloader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4A27D302A156CD300BAC32F /* ImageDownloader.mm */; };
 		D4CCE8C12A154839008151F5 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CCE8C02A154839008151F5 /* NetworkManager.m */; };
@@ -59,6 +60,8 @@
 		D408C1C22A16A12300FDAFF2 /* PosterComponent.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PosterComponent.mm; sourceTree = "<group>"; };
 		D408C1C52A170D2F00FDAFF2 /* MoviesViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoviesViewModel.h; sourceTree = "<group>"; };
 		D408C1C62A170D2F00FDAFF2 /* MoviesViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoviesViewModel.m; sourceTree = "<group>"; };
+		D49864EB2A17F6B6008ADAD5 /* MovieDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDetailsViewController.h; sourceTree = "<group>"; };
+		D49864EC2A17F6B6008ADAD5 /* MovieDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDetailsViewController.m; sourceTree = "<group>"; };
 		D4A27D2C2A15589600BAC32F /* MovieComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieComponent.h; sourceTree = "<group>"; };
 		D4A27D2D2A15589600BAC32F /* MovieComponent.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MovieComponent.mm; sourceTree = "<group>"; };
 		D4A27D2F2A156CD300BAC32F /* ImageDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 			children = (
 				D4DFA9192A141532002C66B8 /* FlixterViewController.h */,
 				D4E6309C2A1517AE0015222B /* FlixterViewController.mm */,
+				D49864EB2A17F6B6008ADAD5 /* MovieDetailsViewController.h */,
+				D49864EC2A17F6B6008ADAD5 /* MovieDetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				D4E6309D2A1517AE0015222B /* FlixterViewController.mm in Sources */,
 				D4CCE8C12A154839008151F5 /* NetworkManager.m in Sources */,
 				D408C1C32A16A12300FDAFF2 /* PosterComponent.mm in Sources */,
+				D49864ED2A17F6B6008ADAD5 /* MovieDetailsViewController.m in Sources */,
 				D408C1C72A170D2F00FDAFF2 /* MoviesViewModel.m in Sources */,
 				D4DFA8E42A140EE9002C66B8 /* AppDelegate.m in Sources */,
 				D4E6309B2A1516A00015222B /* RootComponentProvider.mm in Sources */,

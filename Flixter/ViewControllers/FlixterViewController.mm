@@ -24,7 +24,7 @@
     CKCollectionViewDataSource *_dataSource;
 //    NSMutableArray<Movie *> *_movies;
     //PAListViewModel *_viewModel;
-    // PAImageDownloader *_imageDownloader;
+    ImageDownloader *_imageDownloader;
 }
 
 @end
@@ -43,7 +43,7 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                             collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
         //_viewModel = [[PAListViewModel alloc] init];
-        //_imageDownloader = [[PAImageDownloader alloc] init];
+        _imageDownloader = [[ImageDownloader alloc] init];
     }
     return self;
 }
