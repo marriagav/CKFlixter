@@ -18,10 +18,12 @@
 #import "RootComponentProvider.h"
 #import "Movie.h"
 #import "MoviesViewModel.h"
+#import "ImageDownloader.h"
 
 @interface FlixterViewController () <UICollectionViewDelegateFlowLayout> {
     UICollectionView *_collectionView;
     CKCollectionViewDataSource *_dataSource;
+    ImageDownloader *_imageDownloader;
 //    NSMutableArray<Movie *> *_movies;
     //PAListViewModel *_viewModel;
     ImageDownloader *_imageDownloader;

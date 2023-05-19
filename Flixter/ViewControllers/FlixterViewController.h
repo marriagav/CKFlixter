@@ -6,9 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ComponentKit/CKComponent.h>
-#import "Movie.h"
-#import "ImageDownloader.h"
+
+@class ImageDownloader;
+@class Movie;
+
+@class ImageDownloader;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onTap:(Movie *)movie;
 
 @property (readonly) ImageDownloader *imageDownloader;
+
 @end
 
 NS_ASSUME_NONNULL_END
