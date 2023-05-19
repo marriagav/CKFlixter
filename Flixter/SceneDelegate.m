@@ -6,6 +6,7 @@
 //
 
 #import "SceneDelegate.h"
+#import "FlixterViewController.h"
 
 @interface SceneDelegate ()
 
@@ -15,9 +16,34 @@
 
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
-    // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-    // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-    // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    _window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
+
+//    UIViewController *viewController = [FlixterViewController new];
+//    viewController.view.backgroundColor = [UIColor whiteColor];
+//
+    //viewController.navigationItem.rightBarButtonItem = [self makeBarButtonItem];
+    
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+//    label.text = @"Hello, ComponentKit!";
+//    [viewController.view addSubview:label];
+//
+//    self.window.rootViewController = viewController;
+//    [self.window makeKeyAndVisible];
+    
+//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+//    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+//    [flowLayout setMinimumInteritemSpacing:0];
+//    [flowLayout setMinimumLineSpacing:0];
+//
+//    FlixterViewController *viewController = [FlixterViewController new];
+//    viewController.view.backgroundColor = [UIColor whiteColor];
+//    _window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+//    [_window makeKeyAndVisible];
+//
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[FlixterViewController viewController]];
+    [self.window makeKeyAndVisible];
+    
+    
 }
 
 
