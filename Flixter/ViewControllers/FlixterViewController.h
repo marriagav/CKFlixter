@@ -6,9 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ComponentKit/CKComponent.h>
-#import "Movie.h"
-#import "ImageDownloader.h"
+
+@class ImageDownloader;
+@class Movie;
 
 NS_ASSUME_NONNULL_BEGIN
 
