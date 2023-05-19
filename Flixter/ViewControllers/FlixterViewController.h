@@ -6,8 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ComponentKit/CKComponent.h>
-#import "Movie.h"
+
+@class ImageDownloader;
+@class Movie;
 
 @class ImageDownloader;
 

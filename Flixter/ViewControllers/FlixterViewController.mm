@@ -26,7 +26,7 @@
     ImageDownloader *_imageDownloader;
 //    NSMutableArray<Movie *> *_movies;
     //PAListViewModel *_viewModel;
-    // PAImageDownloader *_imageDownloader;
+    ImageDownloader *_imageDownloader;
 }
 
 @end
