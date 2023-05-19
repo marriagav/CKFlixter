@@ -42,9 +42,6 @@
             newWithMovie:model
             imageDownloader:sender.imageDownloader
             action: action];
-
-    
-    //return [MovieComponent newWithMovie:model imageDownloader:[ImageDownloader new] action:action];
 }
 
 @end
