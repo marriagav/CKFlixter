@@ -18,10 +18,12 @@
 #import "RootComponentProvider.h"
 #import "Movie.h"
 #import "MoviesViewModel.h"
+#import "ImageDownloader.h"
 
 @interface FlixterViewController () <UICollectionViewDelegateFlowLayout> {
     UICollectionView *_collectionView;
     CKCollectionViewDataSource *_dataSource;
+    ImageDownloader *_imageDownloader;
 //    NSMutableArray<Movie *> *_movies;
     //PAListViewModel *_viewModel;
     // PAImageDownloader *_imageDownloader;
@@ -43,7 +45,7 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                             collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
         //_viewModel = [[PAListViewModel alloc] init];
-        //_imageDownloader = [[PAImageDownloader alloc] init];
+        _imageDownloader = [[ImageDownloader alloc] init];
     }
     return self;
 }
