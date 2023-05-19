@@ -13,6 +13,7 @@
 		D408C1C72A170D2F00FDAFF2 /* MoviesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D408C1C62A170D2F00FDAFF2 /* MoviesViewModel.m */; };
 		D4A27D2E2A15589600BAC32F /* MovieComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4A27D2D2A15589600BAC32F /* MovieComponent.mm */; };
 		D4A27D312A156CD300BAC32F /* ImageDownloader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4A27D302A156CD300BAC32F /* ImageDownloader.mm */; };
+		D4B53FE42A180A5F00C619E6 /* MovieDetailsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B53FE32A180A5F00C619E6 /* MovieDetailsViewController.mm */; };
 		D4CCE8C12A154839008151F5 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CCE8C02A154839008151F5 /* NetworkManager.m */; };
 		D4CCE8C82A1549A7008151F5 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CCE8C72A1549A7008151F5 /* Movie.m */; };
 		D4DFA8E42A140EE9002C66B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4DFA8E32A140EE9002C66B8 /* AppDelegate.m */; };
@@ -63,6 +64,8 @@
 		D4A27D2D2A15589600BAC32F /* MovieComponent.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MovieComponent.mm; sourceTree = "<group>"; };
 		D4A27D2F2A156CD300BAC32F /* ImageDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
 		D4A27D302A156CD300BAC32F /* ImageDownloader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageDownloader.mm; sourceTree = "<group>"; };
+		D4B53FE22A180A5F00C619E6 /* MovieDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDetailsViewController.h; sourceTree = "<group>"; };
+		D4B53FE32A180A5F00C619E6 /* MovieDetailsViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MovieDetailsViewController.mm; sourceTree = "<group>"; };
 		D4CCE8BF2A154839008151F5 /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		D4CCE8C02A154839008151F5 /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		D4CCE8C62A1549A7008151F5 /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 			children = (
 				D4DFA9192A141532002C66B8 /* FlixterViewController.h */,
 				D4E6309C2A1517AE0015222B /* FlixterViewController.mm */,
+				D4B53FE22A180A5F00C619E6 /* MovieDetailsViewController.h */,
+				D4B53FE32A180A5F00C619E6 /* MovieDetailsViewController.mm */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				D4E6309D2A1517AE0015222B /* FlixterViewController.mm in Sources */,
 				D4CCE8C12A154839008151F5 /* NetworkManager.m in Sources */,
 				D408C1C32A16A12300FDAFF2 /* PosterComponent.mm in Sources */,
+				D4B53FE42A180A5F00C619E6 /* MovieDetailsViewController.mm in Sources */,
 				D408C1C72A170D2F00FDAFF2 /* MoviesViewModel.m in Sources */,
 				D4DFA8E42A140EE9002C66B8 /* AppDelegate.m in Sources */,
 				D4E6309B2A1516A00015222B /* RootComponentProvider.mm in Sources */,
