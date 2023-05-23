@@ -9,9 +9,10 @@
 #import <ComponentKit/CKComponent.h>
 #import "Movie.h"
 
-@class ImageDownloader;
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ImageDownloader;
 
 @interface MovieDetailsViewController : UIViewController
 

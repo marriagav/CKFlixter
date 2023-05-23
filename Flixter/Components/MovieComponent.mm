@@ -46,9 +46,7 @@
             .justifyContent(CKFlexboxJustifyContentStart)
             .direction(CKFlexboxDirectionRow)
             .spacing(10)
-            .child([PosterComponent newWithUrl:movie.posterUrl
-                               imageDownloader:imageDownloader
-                                          size:imageSize])
+            .child([CKNetworkImageComponent newWithURL:movie.posterUrl imageDownloader:imageDownloader size:imageSize options:{} attributes:{}])
             .child(
                 CK::FlexboxComponentBuilder()
                 .alignItems(CKFlexboxAlignItemsStart)

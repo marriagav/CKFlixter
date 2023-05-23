@@ -19,6 +19,7 @@
 #import "Movie.h"
 #import "MoviesViewModel.h"
 #import "ImageDownloader.h"
+#import "MovieDetailsViewController.h"
 
 @interface FlixterViewController () <UICollectionViewDelegateFlowLayout> {
     UICollectionView *_collectionView;
@@ -142,13 +143,9 @@
 
 - (void)onTap:(Movie *)movie
 {
-//    NSLog(@"%@", movie.title);
-        [self
-         showViewController:[FlixterViewController viewController]
-         sender:self];
-//    [self
-//     showViewController:[FlixterViewController viewControlerWithPhoto:photo imageDownloader:_imageDownloader]
-//     sender:self];
+    [self
+     showViewController:[MovieDetailsViewController viewControlerWithMovie:movie imageDownloader:_imageDownloader]
+     sender:self];
 }
 
 

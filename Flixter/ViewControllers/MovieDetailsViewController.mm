@@ -13,7 +13,9 @@
 #import <ComponentKit/CKDataSourceChangeset.h>
 #import <ComponentKit/CKDataSourceConfiguration.h>
 
-@interface MovieDetailsViewController (){
+#import "MovieDetailsComponent.h"
+
+@interface MovieDetailsViewController () <UICollectionViewDelegateFlowLayout>{
     Movie *_movie;
     CKCollectionViewDataSource *_dataSource;
     UICollectionView *_collectionView;
@@ -42,19 +44,76 @@
 }
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // add root views
+    [self.view addSubview:_collectionView];
+    [_collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSArray<NSString *> *formats = @[@"H:|[C]|", @"V:|[C]|"];
+    for (NSString *format in formats) {
+        [self.view
+         addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:format
+                                                                options:0
+                                                                metrics:nil
+                                                                  views:@{@"C": _collectionView}]];
+    }
+
+    _collectionView.delegate = self;
+    self.view.backgroundColor = [UIColor grayColor];
+
+    // set up data source
+    _dataSource = [[CKCollectionViewDataSource alloc]
+                   initWithCollectionView:_collectionView
+                   supplementaryViewDataSource:nil
+                   configuration:[[CKDataSourceConfiguration alloc]
+                                  initWithComponentProvider:[self class]
+                                  context:_imageDownloader
+                                  sizeRange:[[CKComponentFlexibleSizeRangeProvider
+                                              providerWithFlexibility:CKComponentSizeRangeFlexibleHeight]
+                                             sizeRangeForBoundingSize:self.view.bounds.size]]];
+
+    // render initial data
+    CKDataSourceChangesetBuilder *builder = [CKDataSourceChangesetBuilder dataSourceChangeset];
+    [builder withInsertedSections:[NSIndexSet indexSetWithIndex:0]];
+    [builder withInsertedItems:@{[NSIndexPath indexPathForRow:0 inSection:0]: _movie}];
+    [_dataSource applyChangeset:[builder build] mode:CKUpdateModeAsynchronous userInfo:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark CKComponentProvider
++ (CKComponent *)componentForModel:(id<NSObject>)model context:(id<NSObject>)context;
+{
+    CKFlexboxSpacing padding = {
+        .top = 10,    // Initialize top with a dimension of 10 points
+        .bottom = 10, // Initialize bottom with a dimension of 20 points
+        .start = 20,      // Initialize start with automatic dimension
+        .end = 20,   // Initialize end with a dimension of 50% of the container
+    };
+    return [MovieDetailsComponent newWithMovie:(Movie *)model imageDownloader:(ImageDownloader *)context padding:padding];
 }
-*/
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [_dataSource sizeForItemAtIndexPath:indexPath];
+}
+
+#pragma mark UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView
+       willDisplayCell:(UICollectionViewCell *)cell
+    forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_dataSource announceWillDisplayCell:cell];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView
+  didEndDisplayingCell:(UICollectionViewCell *)cell
+    forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [_dataSource announceDidEndDisplayingCell:cell];
+}
 
 @end
