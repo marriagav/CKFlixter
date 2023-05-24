@@ -7,7 +7,7 @@ target 'Flixter' do
 
   # Pods for Flixter
   pod 'ComponentKit', '~> 0.31'
-
+  pod 'Shimmer', '~> 1.0'
 
   target 'FlixterTests' do
     inherit! :search_paths

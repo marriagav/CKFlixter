@@ -3,22 +3,26 @@ PODS:
     - RenderCore (= 0.31)
     - Yoga (~> 1.14)
   - RenderCore (0.31)
+  - Shimmer (1.0.2)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - ComponentKit (~> 0.31)
+  - Shimmer (~> 1.0)
 
 SPEC REPOS:
   trunk:
     - ComponentKit
     - RenderCore
+    - Shimmer
     - Yoga
 
 SPEC CHECKSUMS:
   ComponentKit: 7bf7048b9814afc6b6641645a14177f95fd9b9ae
   RenderCore: 090beb17b5bff80b86929a7ceb49df789923d23a
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 62299c9884b513bda84f6d9df9c02fbd97321fd9
+PODFILE CHECKSUM: f4c3112e58afd403f52edee4136d554d6f6b069c
 
 COCOAPODS: 1.12.1

@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(instancetype)newWithMovie:(Movie*)movie imageDownloader:(ImageDownloader *)imageDownloader padding:(CKFlexboxSpacing)padding;
 
+//@property (nonatomic, strong) UIImage *image;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,15 +7,32 @@
 
 #import "MovieDetailsComponent.h"
 #import "PosterComponent.h"
+#import "CKComponentSubclass.h"
+#import "NetworkManager.h"
+#import <FBShimmeringView.h>
+
 
 @implementation MovieDetailsComponent
+
++ (id)initialState
+{
+    NSMutableDictionary<NSString *, id> *states = [NSMutableDictionary dictionaryWithDictionary:@{@"image": [UIImage new], @"imageDidLoad": @false}];
+    return states;
+}
 
 + (instancetype)newWithMovie:(Movie *)movie
              imageDownloader:(ImageDownloader *)imageDownloader
                      padding:(CKFlexboxSpacing)padding{
+    
+    CKComponentScope scope(self);
+    NSDictionary *state = scope.state();
+    //NSLog(@"%@", dictionary);
+    BOOL imageDidLoad = [state[@"imageDidLoad"] boolValue];
+    UIImage *image = state[@"image"];
+    
     const CKComponentSize imageSize = {
-        .width = 100,
-        .height = 120
+        .width = 110,
+        .height = 150
     };
     
     const CKComponentSize backgroundImageSize = {
@@ -26,22 +43,73 @@
     
     const CKComponentSize rowSize = {
         .width = [UIScreen mainScreen].bounds.size.width-imageSize.width.value()-50,
-        //        .height = 80
     };
     
-    //    CKAutoSizedImageComponent. sizeOption;
-    //    sizeOption.mode = CKComponentSizeModeOptional;
-    //    sizeOption.size = imageSize;
+    /*CKComponent *backgroundImageComponent = [CKLabelComponent newWithLabelAttributes:{
+        .string = @"Loading...",
+        .font = [UIFont systemFontOfSize:20 weight:0.5],
+        .lineBreakMode = NSLineBreakByTruncatingTail,
+    } viewAttributes:{{@selector(setUserInteractionEnabled:), @NO}} size:{backgroundImageSize}];*/
     
-    UIViewContentModeScaleAspectFit
-    //[CKImageComponent newWithImage:[UIImage imageNamed:@"hols" inBundle:{} withConfiguration:[UIImageConfiguration UIViewContentModeScaleAspectFit]] attributes:{} size:{}];
+    /*CKComponent *backgroundImageComponent = [CKComponent newWithView:{
+        [UIActivityIndicatorView class],
+        {
+            //{@selector(setCenter::),CGPointMake(160, 240)},
+            //{@selector(activityIndicatorViewStyle),UIActivityIndicatorViewStyleMedium},
+            {@selector(setAnimationsEnabled:),@YES}
+            
+        }
+    } size:{backgroundImageSize}];*/
     
-    //CKNetworkImageComponent *backgroundImage = [CKNetworkImageComponent newWithURL:movie.posterUrl imageDownloader:imageDownloader size:backgroundImageSize options:{} attributes:{}];
+    /*CKComponent *backgroundImageComponent = [CKComponent newWithView:{
+        [UIActivityIndicatorView class],
+        {
+            {@selector(setCenter:), [NSValue valueWithCGPoint:CGPointMake(160, 240)]},
+            {@selector(setActivityIndicatorViewStyle:), @(UIActivityIndicatorViewStyleMedium)},
+        }
+    } size:{backgroundImageSize}];*/
     
-    [CKAutoSizedImageComponent newWithComponent:backgroundImage];
+    CKComponent *backgroundImageComponent  = [CKImageComponent
+                                 newWithView:{
+        [UIImageView class],
+        {
+            {@selector(setImage:), image},
+            {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+            {@selector(setClipsToBounds:), @YES}
+        }
+    }
+                                 size:{backgroundImageSize}];
     
-    CKFlexboxComponent *backgroundImageContainer = CK::FlexboxComponentBuilder().child(backgroundImage).positionType(CKFlexboxPositionTypeAbsolute).positionTop(0)
+    /*if (imageDidLoad){
+        backgroundImageComponent  = [CKImageComponent
+                                     newWithView:{
+            [UIImageView class],
+            {
+                {@selector(setImage:), image},
+                {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
+                {@selector(setClipsToBounds:), @YES}
+            }
+        }
+                                     size:{backgroundImageSize}];
+    }*/
+    
+    CKImageComponent *posterImageComponent  = [CKImageComponent
+                                               newWithView:{
+        [UIImageView class],
+        {
+            {@selector(setImage:), image},
+            {@selector(setContentMode:), @(UIViewContentModeScaleAspectFit)},
+            {@selector(setClipsToBounds:), @YES}
+        }
+    }
+                                               size:{imageSize}];
+    
+    CKFlexboxComponent *backgroundImageContainer = CK::FlexboxComponentBuilder().child(backgroundImageComponent).positionType(CKFlexboxPositionTypeAbsolute).positionTop(0)
+        .view({
+            [UIView class],
+        })
         .build();
+    
     
     CKLabelComponent *titleLabel = [CKLabelComponent newWithLabelAttributes:{
         .string = movie.title,
@@ -56,15 +124,12 @@
         .lineBreakMode = NSLineBreakByTruncatingTail,
     } viewAttributes:{ {@selector(setUserInteractionEnabled:), @NO}} size:{}];
     
-//    CKImageComponentOptions *imageOptions = [CKImageComponentOptions new];
-//    imageOptions.contentMode = UIViewContentModeScaleAspectFit;
-    
     CKFlexboxComponent *component = CK::FlexboxComponentBuilder()
         .alignItems(CKFlexboxAlignItemsCenter)
         .justifyContent(CKFlexboxJustifyContentStart)
         .direction(CKFlexboxDirectionRow)
         .spacing(10)
-        .child([CKNetworkImageComponent newWithURL:movie.posterUrl imageDownloader:imageDownloader size:imageSize options:{} attributes:{}])
+        .child(posterImageComponent)
         .child(
                titleLabel
                )
@@ -77,8 +142,8 @@
         .direction(CKFlexboxDirectionColumn)
         .spacing(10)
         .children({{component},{overviewLabel}})
-                .build();
-
+        .build();
+    
     
     CKComponent *paddedComponent = CK::InsetComponentBuilder()
         .insetsTop(padding.top.dimension().value()+150)
@@ -89,18 +154,67 @@
         .build();
     
     CKFlexboxComponent *componentView = [CKFlexboxComponent
-                                  newWithView:{
-                                      [UIView class],
-//                                      {CKComponentTapGestureAttribute(action)}
-                                  }
-                                  size:{}
-                                  style:{}
-                                  children:{
-                                    {backgroundImageContainer},{paddedComponent}
-                                  }];
+                                         newWithView:{
+        [UIView class],
+    }
+                                         size:{}
+                                         style:{}
+                                         children:{
+        {backgroundImageContainer},{paddedComponent}
+    }];
     
-    return [super newWithComponent:componentView];
+    if (!imageDidLoad){
+        /*FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:shimmeringView];
+
+        UILabel *loadingLabel = [[UILabel alloc] initWithFrame:shimmeringView.bounds];
+        loadingLabel.textAlignment = NSTextAlignmentCenter;
+        loadingLabel.text = NSLocalizedString(@"Shimmer", nil);
+        shimmeringView.contentView = loadingLabel;
+
+        // Start shimmering.
+        shimmeringView.shimmering = YES;*/
+        
+        /*componentView = [CKFlexboxComponent
+                                             newWithView:{
+            [FBShimmeringView class],
+            {@selector(shimmering:), @YES}
+        }
+                                             size:{}
+                                             style:{}
+                                             children:{
+            {backgroundImageContainer},{paddedComponent}
+        }];*/
+        
+    }
+    
+    MovieDetailsComponent *moviesComponent= [super newWithComponent:componentView];
+    [moviesComponent loadImageWithUrl:movie.posterUrl];
+    return moviesComponent;
 }
 
+- (void)loadImageWithUrl:(NSURL*)posterUrl
+{
+    // Check if the image has already been loaded
+    NSDictionary *currentState = self.state;
+    BOOL imageDidLoad = [currentState[@"imageDidLoad"] boolValue];
+    
+    if (imageDidLoad){
+        return;
+    }
+    
+    [NetworkManager getImageFromUrl:posterUrl completion:^(UIImage * _Nullable image, NSError * _Nullable error) {
+        if (error){
+            //TODO: handle error
+            NSLog(@"%@", error.description);
+        }
+        else{
+            [self updateState:^(NSMutableDictionary<NSString *, id>* oldState){
+                NSMutableDictionary *newState = [NSMutableDictionary dictionaryWithDictionary:@{@"image": image, @"imageDidLoad": @true}];
+                return newState;
+            } mode:CKUpdateModeAsynchronous];
+        }
+    }];
+}
 
 @end

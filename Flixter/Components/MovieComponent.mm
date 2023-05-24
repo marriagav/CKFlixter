@@ -6,22 +6,48 @@
 //
 
 #import "MovieComponent.h"
-#import "PosterComponent.h"
+#import "CKComponentSubclass.h"
+#import "NetworkManager.h"
 
 @implementation MovieComponent
+
++ (id)initialState
+{
+    NSMutableDictionary<NSString *, id> *states = [NSMutableDictionary dictionaryWithDictionary:@{@"image": [UIImage new], @"imageDidLoad": @false}];
+    return states;
+}
+
 
 + (instancetype)newWithMovie:(Movie *)movie
              imageDownloader:(ImageDownloader *)imageDownloader
                       action:(const CKAction<UIGestureRecognizer *> &)action {
+    
+    CKComponentScope scope(self);
+    NSDictionary *state = scope.state();
+    //NSLog(@"%@", dictionary);
+    UIImage *image = state[@"image"];
+    
     const CKComponentSize imageSize = {
-        .width = 100,
-        .height = 120
+        .width = 110,
+        .height = 150
     };
+    
     
     const CKComponentSize synopsisSize = {
         .width = 210,
         .height = 80
     };
+    
+    CKImageComponent *posterImageComponent  = [CKImageComponent
+                                               newWithView:{
+        [UIImageView class],
+        {
+            {@selector(setImage:), image},
+            {@selector(setContentMode:), @(UIViewContentModeScaleAspectFit)},
+            {@selector(setClipsToBounds:), @YES}
+        }
+    }
+                                               size:{imageSize}];
     
     CKLabelComponent *titleLabel = [CKLabelComponent newWithLabelAttributes:{
         .string = movie.title,
@@ -46,7 +72,7 @@
             .justifyContent(CKFlexboxJustifyContentStart)
             .direction(CKFlexboxDirectionRow)
             .spacing(10)
-            .child([CKNetworkImageComponent newWithURL:movie.posterUrl imageDownloader:imageDownloader size:imageSize options:{} attributes:{}])
+            .child(posterImageComponent)
             .child(
                 CK::FlexboxComponentBuilder()
                 .alignItems(CKFlexboxAlignItemsStart)
@@ -73,7 +99,33 @@
             {component}
         }];
     
-    return [super newWithComponent:containerComponent];
+    MovieComponent *movieComponent = [super newWithComponent:containerComponent];
+    [movieComponent loadImageWithUrl:movie.posterUrl];
+    return movieComponent;
+}
+
+- (void)loadImageWithUrl:(NSURL*)posterUrl
+{
+    // Check if the image has already been loaded
+    NSDictionary *currentState = self.state;
+    BOOL imageDidLoad = [currentState[@"imageDidLoad"] boolValue];
+
+    if (imageDidLoad){
+        return;
+    }
+
+    [NetworkManager getImageFromUrl:posterUrl completion:^(UIImage * _Nullable image, NSError * _Nullable error) {
+        if (error){
+            //TODO: handle error
+            NSLog(@"%@", error.description);
+        }
+        else{
+            [self updateState:^(NSMutableDictionary<NSString *, id>* oldState){
+                NSMutableDictionary *newState = [NSMutableDictionary dictionaryWithDictionary:@{@"image": image, @"imageDidLoad": @true}];
+                return newState;
+            } mode:CKUpdateModeAsynchronous];
+        }
+    }];
 }
 
 @end
