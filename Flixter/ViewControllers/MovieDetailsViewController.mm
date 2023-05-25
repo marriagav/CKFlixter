@@ -12,7 +12,6 @@
 #import <ComponentKit/CKComponentProvider.h>
 #import <ComponentKit/CKDataSourceChangeset.h>
 #import <ComponentKit/CKDataSourceConfiguration.h>
-
 #import "MovieDetailsComponent.h"
 
 @interface MovieDetailsViewController () <UICollectionViewDelegateFlowLayout>{
@@ -48,6 +47,7 @@
 {
     [super viewDidLoad];
     // add root views
+    
     [self.view addSubview:_collectionView];
     [_collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
     NSArray<NSString *> *formats = @[@"H:|[C]|", @"V:|[C]|"];

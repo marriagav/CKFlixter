@@ -9,7 +9,6 @@
 #import "PosterComponent.h"
 #import "CKComponentSubclass.h"
 #import "NetworkManager.h"
-#import <FBShimmeringView.h>
 
 
 @implementation MovieDetailsComponent
@@ -26,7 +25,6 @@
     
     CKComponentScope scope(self);
     NSDictionary *state = scope.state();
-    //NSLog(@"%@", dictionary);
     BOOL imageDidLoad = [state[@"imageDidLoad"] boolValue];
     UIImage *image = state[@"image"];
     
@@ -45,44 +43,16 @@
         .width = [UIScreen mainScreen].bounds.size.width-imageSize.width.value()-50,
     };
     
-    /*CKComponent *backgroundImageComponent = [CKLabelComponent newWithLabelAttributes:{
+    CKComponent *backgroundImageComponent = [CKLabelComponent newWithLabelAttributes:{
         .string = @"Loading...",
         .font = [UIFont systemFontOfSize:20 weight:0.5],
         .lineBreakMode = NSLineBreakByTruncatingTail,
-    } viewAttributes:{{@selector(setUserInteractionEnabled:), @NO}} size:{backgroundImageSize}];*/
+    } viewAttributes:{{@selector(setUserInteractionEnabled:), @NO}} size:{backgroundImageSize}];
     
-    /*CKComponent *backgroundImageComponent = [CKComponent newWithView:{
-        [UIActivityIndicatorView class],
-        {
-            //{@selector(setCenter::),CGPointMake(160, 240)},
-            //{@selector(activityIndicatorViewStyle),UIActivityIndicatorViewStyleMedium},
-            {@selector(setAnimationsEnabled:),@YES}
-            
-        }
-    } size:{backgroundImageSize}];*/
     
-    /*CKComponent *backgroundImageComponent = [CKComponent newWithView:{
-        [UIActivityIndicatorView class],
-        {
-            {@selector(setCenter:), [NSValue valueWithCGPoint:CGPointMake(160, 240)]},
-            {@selector(setActivityIndicatorViewStyle:), @(UIActivityIndicatorViewStyleMedium)},
-        }
-    } size:{backgroundImageSize}];*/
-    
-    CKComponent *backgroundImageComponent  = [CKImageComponent
-                                 newWithView:{
-        [UIImageView class],
-        {
-            {@selector(setImage:), image},
-            {@selector(setContentMode:), @(UIViewContentModeScaleAspectFill)},
-            {@selector(setClipsToBounds:), @YES}
-        }
-    }
-                                 size:{backgroundImageSize}];
-    
-    /*if (imageDidLoad){
+    if (imageDidLoad){
         backgroundImageComponent  = [CKImageComponent
-                                     newWithView:{
+                                                  newWithView:{
             [UIImageView class],
             {
                 {@selector(setImage:), image},
@@ -90,9 +60,8 @@
                 {@selector(setClipsToBounds:), @YES}
             }
         }
-                                     size:{backgroundImageSize}];
-    }*/
-    
+                                                  size:{backgroundImageSize}];
+    }
     CKImageComponent *posterImageComponent  = [CKImageComponent
                                                newWithView:{
         [UIImageView class],
@@ -104,7 +73,7 @@
     }
                                                size:{imageSize}];
     
-    CKFlexboxComponent *backgroundImageContainer = CK::FlexboxComponentBuilder().child(backgroundImageComponent).positionType(CKFlexboxPositionTypeAbsolute).positionTop(0)
+    CKFlexboxComponent *backgroundImageContainer = CK::FlexboxComponentBuilder().child(backgroundImageComponent).positionType(CKFlexboxPositionTypeAbsolute).positionTop(0).direction(CKFlexboxDirectionColumn).justifyContent(CKFlexboxJustifyContentCenter).alignItems(CKFlexboxAlignItemsCenter)
         .view({
             [UIView class],
         })
@@ -162,31 +131,6 @@
                                          children:{
         {backgroundImageContainer},{paddedComponent}
     }];
-    
-    if (!imageDidLoad){
-        /*FBShimmeringView *shimmeringView = [[FBShimmeringView alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:shimmeringView];
-
-        UILabel *loadingLabel = [[UILabel alloc] initWithFrame:shimmeringView.bounds];
-        loadingLabel.textAlignment = NSTextAlignmentCenter;
-        loadingLabel.text = NSLocalizedString(@"Shimmer", nil);
-        shimmeringView.contentView = loadingLabel;
-
-        // Start shimmering.
-        shimmeringView.shimmering = YES;*/
-        
-        /*componentView = [CKFlexboxComponent
-                                             newWithView:{
-            [FBShimmeringView class],
-            {@selector(shimmering:), @YES}
-        }
-                                             size:{}
-                                             style:{}
-                                             children:{
-            {backgroundImageContainer},{paddedComponent}
-        }];*/
-        
-    }
     
     MovieDetailsComponent *moviesComponent= [super newWithComponent:componentView];
     [moviesComponent loadImageWithUrl:movie.posterUrl];
