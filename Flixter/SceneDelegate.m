@@ -21,14 +21,17 @@
     _tabBarController = [[UITabBarController alloc] init];
 
     UIViewController *VC1 = [FlixterViewController viewController];
-    VC1.title = @"Movies";
+    VC1.title = @"Playing now";
     UINavigationController *VC1Navigation = [[UINavigationController alloc]
                                                 initWithRootViewController:VC1];
+    
+    VC1Navigation.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage systemImageNamed:@"house"] tag:0];
 
     UIViewController *VC2 = [PosterViewController viewController];
     VC2.title = @"Posters";
     UINavigationController *VC2Navigation = [[UINavigationController alloc]
                                                 initWithRootViewController:VC2];
+    VC2Navigation.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage systemImageNamed:@"photo.on.rectangle"] tag:1];
 
     NSArray* controllers = [NSArray arrayWithObjects:VC1Navigation, VC2Navigation, nil];
     _tabBarController.viewControllers = controllers;
