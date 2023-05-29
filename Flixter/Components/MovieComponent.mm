@@ -51,13 +51,14 @@
         .string = movie.title,
         .font = [UIFont systemFontOfSize:20 weight:0.5],
         .color = [UIColor redColor]
-    } viewAttributes:{{@selector(setUserInteractionEnabled:), @NO}} size:{}];
+    } viewAttributes:{{@selector(setUserInteractionEnabled:), @NO},{@selector(setBackgroundColor:), [UIColor clearColor]}} size:{}];
     
     CKLabelComponent *overviewLabel = [CKLabelComponent newWithLabelAttributes:{
         .string = movie.overview,
         .font = [UIFont systemFontOfSize:15],
         .lineBreakMode = NSLineBreakByTruncatingTail,
-    } viewAttributes:{ {@selector(setUserInteractionEnabled:), @NO}} size:{}];
+        .color = [UIColor labelColor],
+    } viewAttributes:{ {@selector(setUserInteractionEnabled:), @NO}, {@selector(setBackgroundColor:), [UIColor clearColor]}} size:{}];
     
     CKComponent *component = CK::InsetComponentBuilder()
         .insetsTop(10)

@@ -84,13 +84,13 @@
         .font = [UIFont systemFontOfSize:20 weight:0.5],
         .color = [UIColor redColor],
         .lineBreakMode = NSLineBreakByTruncatingTail,
-    } viewAttributes:{{@selector(setUserInteractionEnabled:), @NO}} size:{rowSize}];
+    } viewAttributes:{{@selector(setUserInteractionEnabled:), @NO},{@selector(setBackgroundColor:), [UIColor clearColor]}} size:{rowSize}];
     
     CKLabelComponent *overviewLabel = [CKLabelComponent newWithLabelAttributes:{
         .string = movie.overview,
         .font = [UIFont systemFontOfSize:15],
         .lineBreakMode = NSLineBreakByTruncatingTail,
-    } viewAttributes:{ {@selector(setUserInteractionEnabled:), @NO}} size:{}];
+    } viewAttributes:{ {@selector(setUserInteractionEnabled:), @NO},{@selector(setBackgroundColor:), [UIColor clearColor]}} size:{}];
     
     CKFlexboxComponent *component = CK::FlexboxComponentBuilder()
         .alignItems(CKFlexboxAlignItemsCenter)
