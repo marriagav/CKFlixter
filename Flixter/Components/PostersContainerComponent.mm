@@ -30,7 +30,7 @@
             .spacing(10)
             .children(std::move(children))
             .build();
-    
+        
         CKComponent *insetsComponent = CK::InsetComponentBuilder()
             .insetsTop(padding.top.dimension().value())
             .insetsLeft(padding.start.dimension().value())
