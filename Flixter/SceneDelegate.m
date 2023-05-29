@@ -7,6 +7,7 @@
 
 #import "SceneDelegate.h"
 #import "FlixterViewController.h"
+#import "PosterViewController.h"
 
 @interface SceneDelegate ()
 
@@ -17,32 +18,22 @@
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     _window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *)scene];
+    _tabBarController = [[UITabBarController alloc] init];
 
-//    UIViewController *viewController = [FlixterViewController new];
-//    viewController.view.backgroundColor = [UIColor whiteColor];
-//
-    //viewController.navigationItem.rightBarButtonItem = [self makeBarButtonItem];
-    
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
-//    label.text = @"Hello, ComponentKit!";
-//    [viewController.view addSubview:label];
-//
-//    self.window.rootViewController = viewController;
-//    [self.window makeKeyAndVisible];
-    
-//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-//    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-//    [flowLayout setMinimumInteritemSpacing:0];
-//    [flowLayout setMinimumLineSpacing:0];
-//
-//    FlixterViewController *viewController = [FlixterViewController new];
-//    viewController.view.backgroundColor = [UIColor whiteColor];
-//    _window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
-//    [_window makeKeyAndVisible];
-//
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[FlixterViewController viewController]];
-    [self.window makeKeyAndVisible];
-    
+    UIViewController *VC1 = [FlixterViewController viewController];
+    VC1.title = @"Movies";
+    UINavigationController *VC1Navigation = [[UINavigationController alloc]
+                                                initWithRootViewController:VC1];
+
+    UIViewController *VC2 = [PosterViewController viewController];
+    VC2.title = @"Posters";
+    UINavigationController *VC2Navigation = [[UINavigationController alloc]
+                                                initWithRootViewController:VC2];
+
+    NSArray* controllers = [NSArray arrayWithObjects:VC1Navigation, VC2Navigation, nil];
+    _tabBarController.viewControllers = controllers;
+    _window.rootViewController = self.tabBarController;
+    [_window makeKeyAndVisible];
     
 }
 

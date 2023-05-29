@@ -1,5 +1,5 @@
 //
-//  FlixterViewController.h
+//  PosterViewController.h
 //  Flixter
 //
 //  Created by Miguel Arriaga Velasco on 16/05/23.
@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FlixterViewController : UIViewController
+@interface PosterViewController : UIViewController
 
 + (instancetype)viewController;
 - (void)onTap:(Movie *)movie;

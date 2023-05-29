@@ -12,11 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ImageDownloader;
-
 @interface MovieDetailsViewController : UIViewController
 
-+ (instancetype)viewControlerWithMovie:(Movie *)movie imageDownloader:(ImageDownloader *)imageDownloader;
++ (instancetype)viewControlerWithMovie:(Movie *)movie;
 
 @end
 

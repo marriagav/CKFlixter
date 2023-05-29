@@ -6,13 +6,14 @@
 //
 
 #import <ComponentKit/ComponentKit.h>
-#import "ImageDownloader.h"
+#import "Movie.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PosterComponent : CKCompositeComponent
 
-+(instancetype)newWithUrl:(NSURL*)url imageDownloader:(ImageDownloader *)imageDownloader size:(CKComponentSize)size;
++ (instancetype)newWithMovie:(Movie *)movie
+                      action:(const CKAction<UIGestureRecognizer *> &)action;
 
 @end
 

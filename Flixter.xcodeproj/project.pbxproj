@@ -12,6 +12,9 @@
 		D408C1C32A16A12300FDAFF2 /* PosterComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = D408C1C22A16A12300FDAFF2 /* PosterComponent.mm */; };
 		D408C1C72A170D2F00FDAFF2 /* MoviesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D408C1C62A170D2F00FDAFF2 /* MoviesViewModel.m */; };
 		D43472042A1968F500CDBE47 /* MovieDetailsComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = D43472032A1968F500CDBE47 /* MovieDetailsComponent.mm */; };
+		D45210F92A244A5200D6CBC8 /* PosterViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D45210F82A244A5200D6CBC8 /* PosterViewController.mm */; };
+		D45210FC2A244E1300D6CBC8 /* PosterViewComponentProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = D45210FB2A244E1300D6CBC8 /* PosterViewComponentProvider.mm */; };
+		D45210FF2A24598400D6CBC8 /* PostersContainerComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = D45210FE2A24598400D6CBC8 /* PostersContainerComponent.mm */; };
 		D4A27D2E2A15589600BAC32F /* MovieComponent.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4A27D2D2A15589600BAC32F /* MovieComponent.mm */; };
 		D4A27D312A156CD300BAC32F /* ImageDownloader.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4A27D302A156CD300BAC32F /* ImageDownloader.mm */; };
 		D4B53FE42A180A5F00C619E6 /* MovieDetailsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D4B53FE32A180A5F00C619E6 /* MovieDetailsViewController.mm */; };
@@ -63,6 +66,12 @@
 		D408C1C62A170D2F00FDAFF2 /* MoviesViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoviesViewModel.m; sourceTree = "<group>"; };
 		D43472022A1968F500CDBE47 /* MovieDetailsComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDetailsComponent.h; sourceTree = "<group>"; };
 		D43472032A1968F500CDBE47 /* MovieDetailsComponent.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MovieDetailsComponent.mm; sourceTree = "<group>"; };
+		D45210F72A244A5200D6CBC8 /* PosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosterViewController.h; sourceTree = "<group>"; };
+		D45210F82A244A5200D6CBC8 /* PosterViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PosterViewController.mm; sourceTree = "<group>"; };
+		D45210FA2A244E1300D6CBC8 /* PosterViewComponentProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosterViewComponentProvider.h; sourceTree = "<group>"; };
+		D45210FB2A244E1300D6CBC8 /* PosterViewComponentProvider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PosterViewComponentProvider.mm; sourceTree = "<group>"; };
+		D45210FD2A24598400D6CBC8 /* PostersContainerComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostersContainerComponent.h; sourceTree = "<group>"; };
+		D45210FE2A24598400D6CBC8 /* PostersContainerComponent.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PostersContainerComponent.mm; sourceTree = "<group>"; };
 		D4A27D2C2A15589600BAC32F /* MovieComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieComponent.h; sourceTree = "<group>"; };
 		D4A27D2D2A15589600BAC32F /* MovieComponent.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MovieComponent.mm; sourceTree = "<group>"; };
 		D4A27D2F2A156CD300BAC32F /* ImageDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
@@ -150,6 +159,8 @@
 			children = (
 				D4E630992A1516A00015222B /* RootComponentProvider.h */,
 				D4E6309A2A1516A00015222B /* RootComponentProvider.mm */,
+				D45210FA2A244E1300D6CBC8 /* PosterViewComponentProvider.h */,
+				D45210FB2A244E1300D6CBC8 /* PosterViewComponentProvider.mm */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -234,6 +245,8 @@
 				D408C1C22A16A12300FDAFF2 /* PosterComponent.mm */,
 				D43472022A1968F500CDBE47 /* MovieDetailsComponent.h */,
 				D43472032A1968F500CDBE47 /* MovieDetailsComponent.mm */,
+				D45210FD2A24598400D6CBC8 /* PostersContainerComponent.h */,
+				D45210FE2A24598400D6CBC8 /* PostersContainerComponent.mm */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -241,6 +254,8 @@
 		D4DFA9182A14147F002C66B8 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D45210F72A244A5200D6CBC8 /* PosterViewController.h */,
+				D45210F82A244A5200D6CBC8 /* PosterViewController.mm */,
 				D4DFA9192A141532002C66B8 /* FlixterViewController.h */,
 				D4E6309C2A1517AE0015222B /* FlixterViewController.mm */,
 				D4B53FE22A180A5F00C619E6 /* MovieDetailsViewController.h */,
@@ -499,16 +514,19 @@
 				D4A27D2E2A15589600BAC32F /* MovieComponent.mm in Sources */,
 				D4A27D312A156CD300BAC32F /* ImageDownloader.mm in Sources */,
 				D4E6309D2A1517AE0015222B /* FlixterViewController.mm in Sources */,
+				D45210F92A244A5200D6CBC8 /* PosterViewController.mm in Sources */,
 				D4CCE8C12A154839008151F5 /* NetworkManager.m in Sources */,
 				D408C1C32A16A12300FDAFF2 /* PosterComponent.mm in Sources */,
 				D4B53FE42A180A5F00C619E6 /* MovieDetailsViewController.mm in Sources */,
 				D408C1C72A170D2F00FDAFF2 /* MoviesViewModel.m in Sources */,
+				D45210FF2A24598400D6CBC8 /* PostersContainerComponent.mm in Sources */,
 				D4DFA8E42A140EE9002C66B8 /* AppDelegate.m in Sources */,
 				D4E6309B2A1516A00015222B /* RootComponentProvider.mm in Sources */,
 				D4DFA8F52A140EEA002C66B8 /* main.m in Sources */,
 				D4CCE8C82A1549A7008151F5 /* Movie.m in Sources */,
 				D4DFA8E72A140EE9002C66B8 /* SceneDelegate.m in Sources */,
 				D4DFA91D2A141681002C66B8 /* HelloWorldComponent.mm in Sources */,
+				D45210FC2A244E1300D6CBC8 /* PosterViewComponentProvider.mm in Sources */,
 				D43472042A1968F500CDBE47 /* MovieDetailsComponent.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

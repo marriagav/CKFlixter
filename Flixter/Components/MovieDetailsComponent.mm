@@ -20,7 +20,6 @@
 }
 
 + (instancetype)newWithMovie:(Movie *)movie
-             imageDownloader:(ImageDownloader *)imageDownloader
                      padding:(CKFlexboxSpacing)padding{
     
     CKComponentScope scope(self);

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MovieComponent : CKCompositeComponent
 
-+(instancetype)newWithMovie:(Movie*)movie imageDownloader:(ImageDownloader *)imageDownloader action:(const CKAction<UIGestureRecognizer *> &)action;
++(instancetype)newWithMovie:(Movie*)movie action:(const CKAction<UIGestureRecognizer *> &)action;
 
 @end
 

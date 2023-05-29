@@ -40,7 +40,6 @@
     
     return [MovieComponent
             newWithMovie:model
-            imageDownloader:sender.imageDownloader
             action: action];
 }
 

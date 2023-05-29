@@ -1,11 +1,11 @@
 //
-//  FlixterViewController.m
+//  PosterViewController.m
 //  Flixter
 //
 //  Created by Miguel Arriaga Velasco on 16/05/23.
 //
 
-#import "FlixterViewController.h"
+#import "PosterViewController.h"
 #import "HelloWorldComponent.h"
 
 #import <ComponentKit/CKCollectionViewDataSource.h>
@@ -15,24 +15,24 @@
 #import <ComponentKit/CKDataSourceConfiguration.h>
 
 #import <CKComponentHostingView.h>
-#import "RootComponentProvider.h"
+#import "PosterViewComponentProvider.h"
 #import "Movie.h"
 #import "MoviesViewModel.h"
 #import "ImageDownloader.h"
 #import "MovieDetailsViewController.h"
 
-@interface FlixterViewController () <UICollectionViewDelegateFlowLayout> {
+@interface PosterViewController () <UICollectionViewDelegateFlowLayout> {
     UICollectionView *_collectionView;
     CKCollectionViewDataSource *_dataSource;
 }
 
 @end
 
-@implementation FlixterViewController
+@implementation PosterViewController
 
 + (instancetype)viewController
 {
-    return [[FlixterViewController alloc] initWithNibName:nil bundle:nil];
+    return [[PosterViewController alloc] initWithNibName:nil bundle:nil];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -76,7 +76,7 @@
                    initWithCollectionView:_collectionView
                    supplementaryViewDataSource:nil
                    configuration:[[CKDataSourceConfiguration alloc]
-                                  initWithComponentProvider:[RootComponentProvider class]
+                                  initWithComponentProvider:[PosterViewComponentProvider class]
                                   context:self
                                   sizeRange:[[CKComponentFlexibleSizeRangeProvider
                                               providerWithFlexibility:CKComponentSizeRangeFlexibleHeight]
@@ -96,13 +96,22 @@
 - (NSMutableDictionary<NSIndexPath *, NSObject *> *)createMoviesDictionaryFromDataDictionary:(NSDictionary *)dataDictionary {
     NSMutableDictionary<NSIndexPath *, NSObject *> *moviesDictionary = [NSMutableDictionary dictionary];
     int counter = 0;
-    
+    int insertions = 0;
+    NSMutableArray<Movie*> *movies = [[NSMutableArray<Movie*> alloc]init];
     for (id element in dataDictionary[@"results"]) {
         Movie *movie = [[Movie alloc] initWithTitle:element[@"title"]
                                            overview:element[@"overview"]
                                           posterUrl:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"https://image.tmdb.org/t/p/original", element[@"poster_path"]]]];
-        [moviesDictionary setObject:movie forKey:[NSIndexPath indexPathForRow:counter inSection:0]];
-        counter++;
+        [movies addObject:movie];
+        if (counter>=2){
+            [moviesDictionary setObject:movies forKey:[NSIndexPath indexPathForRow:insertions inSection:0]];
+            movies = [[NSMutableArray<Movie*> alloc]init];
+            insertions++;
+            counter=0;
+        }
+        else{
+            counter++;
+        }
     }
     
     return moviesDictionary;
@@ -151,6 +160,18 @@
 {
     return [_dataSource sizeForItemAtIndexPath:indexPath];
 }
+
+//- (CGSize)collectionView:(UICollectionView *)collectionView
+//                  layout:(UICollectionViewLayout *)collectionViewLayout
+//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    CGFloat screenWidth = screenRect.size.width;
+//    float cellWidth = screenWidth / 4.0; //Replace the divisor with the column count requirement. Make sure to have it in float.
+//    CGSize size = CGSizeMake(cellWidth, cellWidth);
+//
+//    return size;
+//}
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView

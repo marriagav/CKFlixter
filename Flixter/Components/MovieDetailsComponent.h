@@ -7,15 +7,12 @@
 
 #import <ComponentKit/ComponentKit.h>
 #import "Movie.h"
-#import "ImageDownloader.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MovieDetailsComponent : CKCompositeComponent
 
-+(instancetype)newWithMovie:(Movie*)movie imageDownloader:(ImageDownloader *)imageDownloader padding:(CKFlexboxSpacing)padding;
-
-//@property (nonatomic, strong) UIImage *image;
++(instancetype)newWithMovie:(Movie*)movie padding:(CKFlexboxSpacing)padding;
 
 @end
 

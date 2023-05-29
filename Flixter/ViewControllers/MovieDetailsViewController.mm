@@ -18,24 +18,21 @@
     Movie *_movie;
     CKCollectionViewDataSource *_dataSource;
     UICollectionView *_collectionView;
-    ImageDownloader *_imageDownloader;
 }
 
 @end
 
 @implementation MovieDetailsViewController
 
-+ (instancetype)viewControlerWithMovie:(Movie *)movie imageDownloader:(ImageDownloader *)imageDownloader{
-    return [[MovieDetailsViewController alloc]initWithMovie:movie imageDownloader:imageDownloader];
++ (instancetype)viewControlerWithMovie:(Movie *)movie{
+    return [[MovieDetailsViewController alloc]initWithMovie:movie];
 }
 
 - (instancetype)initWithMovie: (Movie *)movie
-              imageDownloader:(nonnull ImageDownloader *)imageDownloader
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _movie = movie;
-        _imageDownloader = imageDownloader;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                              collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
     }
@@ -68,7 +65,7 @@
                    supplementaryViewDataSource:nil
                    configuration:[[CKDataSourceConfiguration alloc]
                                   initWithComponentProvider:[self class]
-                                  context:_imageDownloader
+                                  context:self
                                   sizeRange:[[CKComponentFlexibleSizeRangeProvider
                                               providerWithFlexibility:CKComponentSizeRangeFlexibleHeight]
                                              sizeRangeForBoundingSize:self.view.bounds.size]]];
@@ -89,7 +86,7 @@
         .start = 20,      // Initialize start with automatic dimension
         .end = 20,   // Initialize end with a dimension of 50% of the container
     };
-    return [MovieDetailsComponent newWithMovie:(Movie *)model imageDownloader:(ImageDownloader *)context padding:padding];
+    return [MovieDetailsComponent newWithMovie:(Movie *)model padding:padding];
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout

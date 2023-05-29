@@ -19,12 +19,10 @@
 
 
 + (instancetype)newWithMovie:(Movie *)movie
-             imageDownloader:(ImageDownloader *)imageDownloader
                       action:(const CKAction<UIGestureRecognizer *> &)action {
     
     CKComponentScope scope(self);
     NSDictionary *state = scope.state();
-    //NSLog(@"%@", dictionary);
     UIImage *image = state[@"image"];
     
     const CKComponentSize imageSize = {

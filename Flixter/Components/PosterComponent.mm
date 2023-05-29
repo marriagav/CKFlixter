@@ -6,23 +6,73 @@
 //
 
 #import "PosterComponent.h"
+#import "CKComponentSubclass.h"
+#import "NetworkManager.h"
 
 @implementation PosterComponent
 
-+(instancetype)newWithUrl:(NSURL *)url imageDownloader:(ImageDownloader *)imageDownloader size:(CKComponentSize)size{
-    
-    CKComponent *component = CK::InsetComponentBuilder()
-        .insetsTop(0)
-        .insetsLeft(0)
-        .insetsBottom(0)
-        .insetsRight(0)
-        .component(
++ (id)initialState
+{
+    NSMutableDictionary<NSString *, id> *states = [NSMutableDictionary dictionaryWithDictionary:@{@"image": [UIImage new], @"imageDidLoad": @false}];
+    return states;
+}
 
-                    [CKNetworkImageComponent newWithURL:url imageDownloader:imageDownloader size:size options:{} attributes:{}])
-                   .build();
+
++ (instancetype)newWithMovie:(Movie *)movie
+                      action:(const CKAction<UIGestureRecognizer *> &)action {
     
-    return [super newWithComponent:component];
+    CKComponentScope scope(self);
+    NSDictionary *state = scope.state();
+    UIImage *image = state[@"image"];
     
+    const CKComponentSize imageSize = {
+        .width = 110,
+        .height = 150
+    };
+    
+    CKImageComponent *posterImageComponent  = [CKImageComponent
+                                               newWithView:{
+        [UIImageView class],
+        {
+            {@selector(setImage:), image},
+            {@selector(setContentMode:), @(UIViewContentModeScaleAspectFit)},
+            {@selector(setClipsToBounds:), @YES}
+        }
+    }
+                                               size:{imageSize}];
+    
+    CKComponent *containerComponent = [CKCompositeComponent newWithView:{
+        [UIView class],
+        {CKComponentTapGestureAttribute(action)}
+    } component:posterImageComponent];
+    
+    PosterComponent *PosterComponent = [super newWithComponent:containerComponent];
+    [PosterComponent loadImageWithUrl:movie.posterUrl];
+    return PosterComponent;
+}
+
+- (void)loadImageWithUrl:(NSURL*)posterUrl
+{
+    // Check if the image has already been loaded
+    NSDictionary *currentState = self.state;
+    BOOL imageDidLoad = [currentState[@"imageDidLoad"] boolValue];
+
+    if (imageDidLoad){
+        return;
+    }
+
+    [NetworkManager getImageFromUrl:posterUrl completion:^(UIImage * _Nullable image, NSError * _Nullable error) {
+        if (error){
+            //TODO: handle error
+            NSLog(@"%@", error.description);
+        }
+        else{
+            [self updateState:^(NSMutableDictionary<NSString *, id>* oldState){
+                NSMutableDictionary *newState = [NSMutableDictionary dictionaryWithDictionary:@{@"image": image, @"imageDidLoad": @true}];
+                return newState;
+            } mode:CKUpdateModeAsynchronous];
+        }
+    }];
 }
 
 @end
