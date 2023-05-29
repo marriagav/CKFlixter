@@ -25,7 +25,7 @@
     
         CKComponent *flexboxComponent =  CK::FlexboxComponentBuilder()
             .alignItems(CKFlexboxAlignItemsCenter)
-            .justifyContent(CKFlexboxJustifyContentStart)
+            .justifyContent(CKFlexboxJustifyContentCenter)
             .direction(CKFlexboxDirectionRow)
             .spacing(10)
             .children(std::move(children))
