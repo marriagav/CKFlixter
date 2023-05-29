@@ -113,6 +113,7 @@
             counter++;
         }
     }
+    [moviesDictionary setObject:movies forKey:[NSIndexPath indexPathForRow:insertions inSection:0]];
     
     return moviesDictionary;
 }
