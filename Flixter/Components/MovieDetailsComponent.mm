@@ -90,6 +90,7 @@
         .string = movie.overview,
         .font = [UIFont systemFontOfSize:15],
         .lineBreakMode = NSLineBreakByTruncatingTail,
+        .color = [UIColor labelColor]
     } viewAttributes:{ {@selector(setUserInteractionEnabled:), @NO},{@selector(setBackgroundColor:), [UIColor clearColor]}} size:{}];
     
     CKFlexboxComponent *component = CK::FlexboxComponentBuilder()
