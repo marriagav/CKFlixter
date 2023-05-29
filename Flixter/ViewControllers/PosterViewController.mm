@@ -161,18 +161,6 @@
     return [_dataSource sizeForItemAtIndexPath:indexPath];
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView
-//                  layout:(UICollectionViewLayout *)collectionViewLayout
-//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    CGRect screenRect = [[UIScreen mainScreen] bounds];
-//    CGFloat screenWidth = screenRect.size.width;
-//    float cellWidth = screenWidth / 4.0; //Replace the divisor with the column count requirement. Make sure to have it in float.
-//    CGSize size = CGSizeMake(cellWidth, cellWidth);
-//
-//    return size;
-//}
-
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView
        willDisplayCell:(UICollectionViewCell *)cell

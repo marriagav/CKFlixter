@@ -19,7 +19,6 @@
                [sender onTap:movie];
            });
            PosterComponent *posterComponent = [PosterComponent newWithMovie:movie action:action];
-           //CKFlexboxComponentChild child = [CKFlexboxComponentChild newWithComponent:posterComponent];
            CKFlexboxComponentChild child = {posterComponent};
            children.push_back(child);
        }

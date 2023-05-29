@@ -48,10 +48,10 @@
     NSArray<Movie *> *movies = (NSArray<Movie *> *)model;
     
     CKFlexboxSpacing padding = {
-        .top = 10,    // Initialize top with a dimension of 10 points
-        .bottom = 10, // Initialize bottom with a dimension of 20 points
-        .start = 20,      // Initialize start with automatic dimension
-        .end = 20,   // Initialize end with a dimension of 50% of the container
+        .top = 10,    
+        .bottom = 10,
+        .start = 20,
+        .end = 20,
     };
 
     return [PostersContainerComponent

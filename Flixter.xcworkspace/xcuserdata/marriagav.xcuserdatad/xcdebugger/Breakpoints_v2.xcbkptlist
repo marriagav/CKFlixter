@@ -222,8 +222,8 @@
             filePath = "Flixter/Components/PostersContainerComponent.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "+newWithMovies:sender:padding:"
             landmarkType = "7">
          </BreakpointContent>
